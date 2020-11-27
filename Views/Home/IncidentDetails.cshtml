@@ -1,0 +1,61 @@
+﻿@using HawaiiCrimeDetails.Models.ViewModel;
+@model IEnumerable<Details>
+
+<h4>Details Page - Details of the crime record.</h4>
+<p>
+    The below table provides the details of reported crimes. "Back to list" will take you to the Incidents page.
+</p>
+<p>
+    @Html.ActionLink("Back to List", "Incidents")
+</p>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Record ID</th>
+                <th>Agency Location</th>
+                <th>Type of Crime</th>
+                <th>Date</th>
+                <th>Crime Address</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cmid)
+                    </td>
+                    <td style="width: 150px;">
+                        @Html.DisplayFor(modelItem => item.cmagency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.blockaddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td style="width: 120px;">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.objectid }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.objectid })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    if("@ViewBag.dbSuccessDel" !="")
+        alert("Record deleted successfully");
+</script>
